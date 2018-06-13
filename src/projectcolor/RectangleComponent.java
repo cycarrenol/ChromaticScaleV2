@@ -31,7 +31,7 @@ public class RectangleComponent extends JComponent {
         
         g2.setColor(fillColor);
  
-            Rectangle box = new Rectangle(10+var, 10, 10+var, 100);
+            Rectangle box = new Rectangle(1+var, 1, 1+var, 100);
 
             g2.fill(box);
 

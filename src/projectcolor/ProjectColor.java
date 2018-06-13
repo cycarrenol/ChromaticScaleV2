@@ -13,52 +13,89 @@ public class ProjectColor {
         Generator objGen = new Generator();
 
         JFrame frame = new JFrame();
-        final int FRAME_WIDTH = 720;
+        final int FRAME_WIDTH = 1380;
         final int FRAME_HEIGHT = 170;
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setTitle("Escala cromática");
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        String[] arregloHex = new String[12];
-
-        arregloHex[0] = "#14011f";
-      
-        arregloHex[1] = "#808000";
        
-        arregloHex[2] = "#7800ff";
-       
-        arregloHex[3] = "#0a00fe";
-       
-        arregloHex[4] = "#0181fe";
-       
-        arregloHex[5] = "#00f2fe";
-        
-        arregloHex[6] = "#01ff7b";
-      
-        arregloHex[7] = "#37fe01";
-       
-        arregloHex[8] = "#c7ff03";
-      
-        arregloHex[9] = "#ff6801";
-        
-        arregloHex[10] = "#f00001";
-        
-        arregloHex[11] = "#5f0102";
        
 
         int dato =0;
       
-        for (int j = 0; j < 35; j++) {
+        for (int j = 0; j < 1000; j++) {
 
-            int numAl = objGen.genNumAleatorio();
-            String colorStr = arregloHex[numAl];
+           
+          //CONVERTIR HSV A RGB
+        double H = objGen.genNumAleatorio()+j;     
+        double S = 1;//saturation
+        double V = 1;//value
 
-            int r = Integer.valueOf(colorStr.substring(1, 3), 16);
-            int g = Integer.valueOf(colorStr.substring(3, 5), 16);
-            int b = Integer.valueOf(colorStr.substring(5, 7), 16);
+        double R1 = 0;//Red
+        double G1 = 0;//Blue
+        double B1 = 0;//Green
 
-            Color fillColor = new Color(r, g, b);
+        //Begin the formula
+        double C = V * S;
+
+        double X = C * (1 - Math.abs(((H / 60) % 2) - 1));
+        System.out.println("°°" + X);
+        double m = V - C;
+
+        if (H >= 0 && H < 60) {
+
+            R1 = (C + m) * 255;
+            G1 = (X + m) * 255;
+            B1 = (0 + m) * 255;
+
+        } else if (H >= 60 && H < 120) {
+
+            R1 = (X + m) * 255;
+            G1 = (C + m) * 255;
+            B1 = (0 + m) * 255;
+
+        } else if (H >= 120 && H < 180) {
+
+            R1 = (0 + m) * 255;
+            G1 = (C + m) * 255;
+            B1 = (X + m) * 255;
+
+        } else if (H >= 180 && H < 240) {
+
+            R1 = (0 + m) * 255;
+            G1 = (X + m) * 255;
+            B1 = (C + m) * 255;
+
+        } else if (H >= 240 && H < 300) {
+
+            R1 = (X + m) * 255;
+            G1 = (0 + m) * 255;
+            B1 = (C + m) * 255;
+
+        } else if (H >= 300 && H < 360) {
+
+            R1 = (C + m) * 255;
+            G1 = (0 + m) * 255;
+            B1 = (X + m) * 255;
+
+        }
+
+        int R2 = (int) R1;
+        int G2 = (int) G1;
+        int B2 = (int) B1;
+
+        System.out.println(R2);
+        System.out.println(G2);
+        System.out.println(B2);
+
+        // FIN CONVERSION
+            
+            
+            
+
+            Color fillColor = new Color(R2, G2, B2);
 
             RectangleComponent component = new RectangleComponent(fillColor, dato);
            
@@ -66,9 +103,10 @@ public class ProjectColor {
            frame.add(component);
              frame.setVisible(true);
                   
-             dato = dato+10;
+             dato = dato+1;
              
-              TimeUnit.SECONDS.sleep(1);
+              //TimeUnit.SECONDS.sleep(1);
+              TimeUnit.MICROSECONDS.sleep(1);
               
         }
         
