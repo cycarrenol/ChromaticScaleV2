@@ -12,8 +12,8 @@ public class Generator {
 
     public int genNumAleatorio() {
 
-       // Numaleatorio = 0 + Aleatorio.nextInt(359);
-      Numaleatorio = 1 + Aleatorio.nextInt(1);
+        Numaleatorio = 1 + Aleatorio.nextInt(1080);
+//      Numaleatorio = 1 + Aleatorio.nextInt(1);
 
         return Numaleatorio;
 
